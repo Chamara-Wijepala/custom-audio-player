@@ -105,6 +105,9 @@ body {
 	padding: 1rem;
 }
 
+/* layout */
+
+/* song details section */
 .song-details {
 	max-width: 32rem;
 }
@@ -122,6 +125,19 @@ body {
 .title {
 	font-size: 1.5rem;
 	margin-block: 1.125rem;
+}
+
+/* audio player section */
+.audio-player-container {
+	max-width: 40rem;
+}
+
+#play-btn {
+	background-color: hsl(var(--clr-accent-400));
+	padding: 0.35rem;
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 50%;
 }
 
 @media (min-width: 40em) {
