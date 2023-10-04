@@ -98,6 +98,7 @@ body {
 		hsl(var(--clr-primary-700)),
 		hsl(var(--clr-primary-800))
 	);
+	color: hsl(var(--clr-accent-300));
 }
 
 .container {
@@ -118,7 +119,6 @@ body {
 
 .title,
 .artist {
-	color: hsl(var(--clr-accent-300));
 	font-weight: 500;
 }
 
