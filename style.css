@@ -1,0 +1,92 @@
+:root {
+	--clr-primary-800: 253 18% 10%;
+	--clr-primary-700: 253 14% 13%;
+	--clr-accent-400: 339 100% 70%;
+	--clr-accent-300: 163 100% 50%;
+}
+
+@font-face {
+	font-display: swap;
+	font-family: 'MS Gothic';
+	font-style: normal;
+	font-weight: 400;
+	src: url('./assets/MS-Gothic.ttf') format('truetype');
+}
+
+/*  Edited version of CSS reset by Andy Bell */
+/*  https://piccalil.li/blog/a-modern-css-reset/ */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	font: inherit;
+}
+
+ul[role='list'],
+ol[role='list'] {
+	list-style: none;
+}
+
+html:focus-within {
+	scroll-behavior: smooth;
+}
+
+html,
+body {
+	min-height: 100%;
+}
+
+body {
+	text-rendering: optimizeSpeed;
+	line-height: 1.5;
+	font-family: 'MS Gothic';
+}
+
+a {
+	outline: none;
+	text-decoration: none;
+	color: inherit;
+}
+
+a:not([class]) {
+	text-decoration-skip-ink: auto;
+}
+
+button,
+input[type='”submit”'],
+input[type='”reset”'] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
+}
+
+img,
+picture,
+svg {
+	max-width: 100%;
+	display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html:focus-within {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
