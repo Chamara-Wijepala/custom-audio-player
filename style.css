@@ -90,3 +90,45 @@ svg {
 		scroll-behavior: auto !important;
 	}
 }
+
+/* general */
+
+body {
+	background: linear-gradient(
+		hsl(var(--clr-primary-700)),
+		hsl(var(--clr-primary-800))
+	);
+}
+
+.container {
+	margin-inline: auto;
+	padding: 1rem;
+}
+
+.song-details {
+	max-width: 32rem;
+}
+
+.album-cover {
+	margin-bottom: 1.5rem;
+}
+
+.title,
+.artist {
+	color: hsl(var(--clr-accent-300));
+	font-weight: 500;
+}
+
+.title {
+	font-size: 1.5rem;
+	margin-block: 1.125rem;
+}
+
+@media (min-width: 40em) {
+	.title {
+		font-size: 2rem;
+	}
+	.artist {
+		font-size: 1.5rem;
+	}
+}
