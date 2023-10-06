@@ -132,7 +132,7 @@ body {
 	max-width: 40rem;
 }
 
-#play-btn {
+.btn {
 	background-color: hsl(var(--clr-accent-400));
 	padding: 0.35rem;
 	width: 2.5rem;
