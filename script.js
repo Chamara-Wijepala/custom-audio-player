@@ -1,6 +1,9 @@
 import lottieWeb from 'https://cdn.skypack.dev/lottie-web';
 
+const audioPlayer = document.querySelector('.audio-player');
 const playBtn = document.getElementById('play-btn');
+const seekSlider = document.getElementById('seek-slider');
+const volumeSlider = document.getElementById('volume-slider');
 
 let state = 'play';
 
@@ -28,4 +31,25 @@ playBtn.addEventListener('click', () => {
 		playBtn.removeAttribute('aria-label');
 		playBtn.setAttribute('aria-label', 'play button');
 	}
+});
+
+const showRangeProgress = (rangeInput) => {
+	if (rangeInput === seekSlider) {
+		audioPlayer.style.setProperty(
+			'--seek-before-width',
+			(rangeInput.value / rangeInput.max) * 100 + '%'
+		);
+	} else {
+		audioPlayer.style.setProperty(
+			'--volume-before-width',
+			(rangeInput.value / rangeInput.max) * 100 + '%'
+		);
+	}
+};
+
+seekSlider.addEventListener('input', (e) => {
+	showRangeProgress(e.target);
+});
+volumeSlider.addEventListener('input', (e) => {
+	showRangeProgress(e.target);
 });
