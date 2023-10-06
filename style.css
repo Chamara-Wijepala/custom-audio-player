@@ -1,6 +1,7 @@
 :root {
 	--clr-primary-800: 253 18% 10%;
 	--clr-primary-700: 253 14% 13%;
+	--clr-secondary-600: 254 16% 21%;
 	--clr-accent-400: 339 100% 70%;
 	--clr-accent-300: 163 100% 50%;
 }
@@ -106,6 +107,19 @@ body {
 	padding: 1rem;
 }
 
+.btn {
+	background-color: hsl(var(--clr-secondary-600));
+	padding: 0.35rem;
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 50%;
+}
+
+/* change color of animated icons */
+path {
+	stroke: hsl(var(--clr-accent-400));
+}
+
 /* layout */
 
 /* song details section */
@@ -130,14 +144,6 @@ body {
 /* audio player section */
 .audio-player-container {
 	max-width: 40rem;
-}
-
-.btn {
-	background-color: hsl(var(--clr-accent-400));
-	padding: 0.35rem;
-	width: 2.5rem;
-	height: 2.5rem;
-	border-radius: 50%;
 }
 
 @media (min-width: 40em) {
