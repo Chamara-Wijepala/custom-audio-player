@@ -221,7 +221,6 @@ input[type='range']::-webkit-slider-runnable-track {
 		hsl(var(--clr-accent-400) / 0.2) var(--buffered-width)
 	);
 }
-
 /* track: firefox */
 input[type='range']::-moz-range-track {
 	width: 100%;

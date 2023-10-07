@@ -1,3 +1,5 @@
+// Presentational logic of the audio player
+
 import lottieWeb from 'https://cdn.skypack.dev/lottie-web';
 
 const audioPlayer = document.querySelector('.audio-player');
@@ -52,4 +54,17 @@ seekSlider.addEventListener('input', (e) => {
 });
 volumeSlider.addEventListener('input', (e) => {
 	showRangeProgress(e.target);
+});
+
+// Functional logic of the audio player
+
+const volumeSliderContainer = document.querySelector(
+	'.volume-slider-container'
+);
+const toggleVolumeSliderBtn = document.getElementById(
+	'toggle-volume-slider-btn'
+);
+
+toggleVolumeSliderBtn.addEventListener('click', () => {
+	volumeSliderContainer.classList.toggle('active');
 });
