@@ -64,6 +64,32 @@ const volumeSliderContainer = document.querySelector(
 const toggleVolumeSliderBtn = document.getElementById(
 	'toggle-volume-slider-btn'
 );
+const audio = document.querySelector('audio');
+const duration = document.getElementById('duration');
+
+const calculateTime = (secs) => {
+	const minutes = Math.floor(secs / 60);
+	const seconds = Math.floor(secs % 60);
+	const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+	return `${minutes}:${returnedSeconds}`;
+};
+
+const displayDuration = () => {
+	duration.textContent = calculateTime(audio.duration);
+};
+
+/*
+The audio element inherits the HTMLMediaElement interface which provides the
+readyState property.
+A readyState value of 1 indicates that the metadata is available.
+*/
+if (audio.readyState > 0) {
+	displayDuration();
+} else {
+	audio.addEventListener('loadedmetadata', () => {
+		displayDuration();
+	});
+}
 
 toggleVolumeSliderBtn.addEventListener('click', () => {
 	volumeSliderContainer.classList.toggle('active');
