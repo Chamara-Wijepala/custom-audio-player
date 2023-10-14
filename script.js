@@ -84,6 +84,16 @@ const setSliderMax = () => {
 	seekSlider.max = Math.floor(audio.duration);
 };
 
+const displayBufferedAmount = () => {
+	const bufferedAmount = Math.floor(
+		audio.buffered.end(audio.buffered.length - 1)
+	);
+	audioPlayer.style.setProperty(
+		'--buffered-width',
+		`${(bufferedAmount / seekSlider.max) * 100}%`
+	);
+};
+
 /*
 The audio element inherits the HTMLMediaElement interface which provides the
 readyState property.
@@ -92,13 +102,17 @@ A readyState value of 1 indicates that the metadata is available.
 if (audio.readyState > 0) {
 	displayDuration();
 	setSliderMax();
+	displayBufferedAmount();
 } else {
 	audio.addEventListener('loadedmetadata', () => {
 		displayDuration();
 		setSliderMax();
+		displayBufferedAmount();
 	});
 }
 
 toggleVolumeSliderBtn.addEventListener('click', () => {
 	volumeSliderContainer.classList.toggle('active');
 });
+
+audio.addEventListener('progress', displayBufferedAmount);
