@@ -78,6 +78,12 @@ const displayDuration = () => {
 	duration.textContent = calculateTime(audio.duration);
 };
 
+// Set the max value of the slider to the duration of the song so that the range
+// reaches the end when the song finishes
+const setSliderMax = () => {
+	seekSlider.max = Math.floor(audio.duration);
+};
+
 /*
 The audio element inherits the HTMLMediaElement interface which provides the
 readyState property.
@@ -85,9 +91,11 @@ A readyState value of 1 indicates that the metadata is available.
 */
 if (audio.readyState > 0) {
 	displayDuration();
+	setSliderMax();
 } else {
 	audio.addEventListener('loadedmetadata', () => {
 		displayDuration();
+		setSliderMax();
 	});
 }
 
