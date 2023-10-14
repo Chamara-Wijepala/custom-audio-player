@@ -66,6 +66,7 @@ const toggleVolumeSliderBtn = document.getElementById(
 );
 const audio = document.querySelector('audio');
 const duration = document.getElementById('duration');
+const currentTime = document.getElementById('current-time');
 
 const calculateTime = (secs) => {
 	const minutes = Math.floor(secs / 60);
@@ -116,3 +117,7 @@ toggleVolumeSliderBtn.addEventListener('click', () => {
 });
 
 audio.addEventListener('progress', displayBufferedAmount);
+
+seekSlider.addEventListener('input', () => {
+	currentTime.textContent = calculateTime(seekSlider.value);
+});
