@@ -53,6 +53,7 @@ const toggleVolumeSliderBtn = document.getElementById(
 );
 const duration = document.getElementById('duration');
 const currentTime = document.getElementById('current-time');
+const output = document.getElementById('volume-output');
 
 let raf = null;
 
@@ -146,4 +147,10 @@ seekSlider.addEventListener('change', () => {
 	if (!audio.paused) {
 		requestAnimationFrame(whilePlaying);
 	}
+});
+volumeSlider.addEventListener('input', (e) => {
+	const value = e.target.value;
+
+	output.textContent = value;
+	audio.volume = value / 100;
 });

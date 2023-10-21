@@ -195,6 +195,8 @@ path {
 
 #volume-output {
 	transform: rotate(90deg);
+	width: 24px;
+	text-align: center;
 }
 
 /* slider */
