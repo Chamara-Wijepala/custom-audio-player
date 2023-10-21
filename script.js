@@ -22,22 +22,6 @@ const animation = lottieWeb.loadAnimation({
 // change to play icon since the icon animation starts as a pause icon
 animation.goToAndStop(14, true);
 
-playBtn.addEventListener('click', () => {
-	if (state === 'play') {
-		audio.play();
-		animation.playSegments([14, 27], true);
-		state = 'pause';
-		playBtn.removeAttribute('aria-label');
-		playBtn.setAttribute('aria-label', 'pause button');
-	} else {
-		audio.pause();
-		animation.playSegments([0, 14], true);
-		state = 'play';
-		playBtn.removeAttribute('aria-label');
-		playBtn.setAttribute('aria-label', 'play button');
-	}
-});
-
 const showRangeProgress = (rangeInput) => {
 	if (rangeInput === seekSlider) {
 		audioPlayer.style.setProperty(
@@ -70,6 +54,8 @@ const toggleVolumeSliderBtn = document.getElementById(
 const duration = document.getElementById('duration');
 const currentTime = document.getElementById('current-time');
 
+let raf = null;
+
 const calculateTime = (secs) => {
 	const minutes = Math.floor(secs / 60);
 	const seconds = Math.floor(secs % 60);
@@ -97,6 +83,16 @@ const displayBufferedAmount = () => {
 	);
 };
 
+const whilePlaying = () => {
+	seekSlider.value = Math.floor(audio.currentTime);
+	currentTime.textContent = calculateTime(seekSlider.value);
+	audioPlayer.style.setProperty(
+		'--seek-before-width',
+		`${(seekSlider.value / seekSlider.max) * 100}%`
+	);
+	raf = requestAnimationFrame(whilePlaying);
+};
+
 /*
 The audio element inherits the HTMLMediaElement interface which provides the
 readyState property.
@@ -114,6 +110,24 @@ if (audio.readyState > 0) {
 	});
 }
 
+playBtn.addEventListener('click', () => {
+	if (state === 'play') {
+		audio.play();
+		animation.playSegments([14, 27], true);
+		requestAnimationFrame(whilePlaying);
+		state = 'pause';
+		playBtn.removeAttribute('aria-label');
+		playBtn.setAttribute('aria-label', 'pause button');
+	} else {
+		audio.pause();
+		animation.playSegments([0, 14], true);
+		cancelAnimationFrame(raf);
+		state = 'play';
+		playBtn.removeAttribute('aria-label');
+		playBtn.setAttribute('aria-label', 'play button');
+	}
+});
+
 toggleVolumeSliderBtn.addEventListener('click', () => {
 	volumeSliderContainer.classList.toggle('active');
 });
@@ -122,8 +136,14 @@ audio.addEventListener('progress', displayBufferedAmount);
 
 seekSlider.addEventListener('input', () => {
 	currentTime.textContent = calculateTime(seekSlider.value);
+	if (!audio.paused) {
+		cancelAnimationFrame(raf);
+	}
 });
 // Allow user to seek to a specific part of the audio
 seekSlider.addEventListener('change', () => {
 	audio.currentTime = seekSlider.value;
+	if (!audio.paused) {
+		requestAnimationFrame(whilePlaying);
+	}
 });
