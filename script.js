@@ -7,10 +7,13 @@ const playBtn = document.getElementById('play-btn');
 const seekSlider = document.getElementById('seek-slider');
 const volumeSlider = document.getElementById('volume-slider');
 const audio = document.querySelector('audio');
+const toggleVolumeSliderBtn = document.getElementById(
+	'toggle-volume-slider-btn'
+);
 
 let state = 'play';
 
-const animation = lottieWeb.loadAnimation({
+const playAnimation = lottieWeb.loadAnimation({
 	container: playBtn,
 	path: 'https://maxst.icons8.com/vue-static/landings/animated-icons/icons/pause/pause.json',
 	renderer: 'svg',
@@ -18,9 +21,17 @@ const animation = lottieWeb.loadAnimation({
 	autoplay: false,
 	name: 'play animation',
 });
+const muteAnimation = lottieWeb.loadAnimation({
+	container: toggleVolumeSliderBtn,
+	path: 'https://maxst.icons8.com/vue-static/landings/animated-icons/icons/no-sound/no-sound.json',
+	renderer: 'svg',
+	loop: false,
+	autoplay: false,
+	name: 'mute animation',
+});
 
 // change to play icon since the icon animation starts as a pause icon
-animation.goToAndStop(14, true);
+playAnimation.goToAndStop(14, true);
 
 const showRangeProgress = (rangeInput) => {
 	if (rangeInput === seekSlider) {
@@ -47,9 +58,6 @@ volumeSlider.addEventListener('input', (e) => {
 
 const volumeSliderContainer = document.querySelector(
 	'.volume-slider-container'
-);
-const toggleVolumeSliderBtn = document.getElementById(
-	'toggle-volume-slider-btn'
 );
 const duration = document.getElementById('duration');
 const currentTime = document.getElementById('current-time');
@@ -114,14 +122,14 @@ if (audio.readyState > 0) {
 playBtn.addEventListener('click', () => {
 	if (state === 'play') {
 		audio.play();
-		animation.playSegments([14, 27], true);
+		playAnimation.playSegments([14, 27], true);
 		requestAnimationFrame(whilePlaying);
 		state = 'pause';
 		playBtn.removeAttribute('aria-label');
 		playBtn.setAttribute('aria-label', 'pause button');
 	} else {
 		audio.pause();
-		animation.playSegments([0, 14], true);
+		playAnimation.playSegments([0, 14], true);
 		cancelAnimationFrame(raf);
 		state = 'play';
 		playBtn.removeAttribute('aria-label');
@@ -153,4 +161,10 @@ volumeSlider.addEventListener('input', (e) => {
 
 	output.textContent = value;
 	audio.volume = value / 100;
+
+	if (value === '0') {
+		muteAnimation.playSegments([0, 14], true);
+	} else {
+		muteAnimation.goToAndStop(0);
+	}
 });
