@@ -6,6 +6,7 @@ const audioPlayer = document.querySelector('.audio-player');
 const playBtn = document.getElementById('play-btn');
 const seekSlider = document.getElementById('seek-slider');
 const volumeSlider = document.getElementById('volume-slider');
+const audio = document.querySelector('audio');
 
 let state = 'play';
 
@@ -23,11 +24,13 @@ animation.goToAndStop(14, true);
 
 playBtn.addEventListener('click', () => {
 	if (state === 'play') {
+		audio.play();
 		animation.playSegments([14, 27], true);
 		state = 'pause';
 		playBtn.removeAttribute('aria-label');
 		playBtn.setAttribute('aria-label', 'pause button');
 	} else {
+		audio.pause();
 		animation.playSegments([0, 14], true);
 		state = 'play';
 		playBtn.removeAttribute('aria-label');
@@ -64,7 +67,6 @@ const volumeSliderContainer = document.querySelector(
 const toggleVolumeSliderBtn = document.getElementById(
 	'toggle-volume-slider-btn'
 );
-const audio = document.querySelector('audio');
 const duration = document.getElementById('duration');
 const currentTime = document.getElementById('current-time');
 
