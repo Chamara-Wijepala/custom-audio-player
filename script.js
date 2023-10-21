@@ -11,6 +11,10 @@ const toggleVolumeSliderBtn = document.getElementById(
 	'toggle-volume-slider-btn'
 );
 
+// reset sliders at every page load
+seekSlider.value = 0;
+volumeSlider.value = 100;
+
 let state = 'play';
 
 const playAnimation = lottieWeb.loadAnimation({
