@@ -193,6 +193,16 @@ path {
 	gap: 0.5rem;
 }
 
+#volume-slider::-webkit-slider-runnable-track {
+	background: hsl(var(--clr-accent-400) / 0.6);
+}
+#volume-slider::-moz-range-track {
+	background: hsl(var(--clr-accent-400) / 0.6);
+}
+#volume-slider::-ms-fill-upper {
+	background: hsl(var(--clr-accent-400) / 0.6);
+}
+
 #volume-output {
 	transform: rotate(90deg);
 	width: 24px;
