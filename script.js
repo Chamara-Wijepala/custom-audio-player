@@ -123,3 +123,7 @@ audio.addEventListener('progress', displayBufferedAmount);
 seekSlider.addEventListener('input', () => {
 	currentTime.textContent = calculateTime(seekSlider.value);
 });
+// Allow user to seek to a specific part of the audio
+seekSlider.addEventListener('change', () => {
+	audio.currentTime = seekSlider.value;
+});
